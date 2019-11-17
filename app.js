@@ -21,7 +21,16 @@ class UI{
     }
 
     showAlert(message, className){
+        const div = document.createElement('div');
+        div.className = `alert ${className}`;
+        div.appendChild(document.createTextNode(message));
+        const container = document.querySelector('.container');
+        const form = document.querySelector('#book-form');
+        container.insertBefore(div, form);
 
+        setTimeout(function(){
+            document.querySelector('.alert').remove();
+        }, 3000);
     }
 
     deleteBook(target){
@@ -39,10 +48,14 @@ document.getElementById('book-form').addEventListener('submit', function(e){
           isbn = document.getElementById('isbn').value;
 
     const book = new Book(title, author, isbn);
-    
     const ui = new UI();
 
-    ui.addBookToList(book);
-    ui.clearFields();
+    if(title === '' || author === '' || isbn === ''){
+        ui.showAlert('Please fill in all fields', 'error');
+    }else{
+        ui.addBookToList(book);
+        ui.clearFields();   
+    }
+
     e.preventDefault();
 });
