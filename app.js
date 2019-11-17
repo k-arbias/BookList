@@ -34,7 +34,9 @@ class UI{
     }
 
     deleteBook(target){
-
+        if(target.className === 'delete'){
+            target.parentElement.parentElement.remove();
+        }
     }
     clearFields(){
         document.getElementById('title').value = '';
@@ -57,6 +59,14 @@ document.getElementById('book-form').addEventListener('submit', function(e){
         ui.showAlert('Book Added!', 'success');
         ui.clearFields();   
     }
+
+    e.preventDefault();
+});
+
+document.getElementById('book-list').addEventListener('click', function(e){
+    const ui = new UI();
+    ui.deleteBook(e.target);
+    ui.showAlert('Book Removed', 'success');
 
     e.preventDefault();
 });
