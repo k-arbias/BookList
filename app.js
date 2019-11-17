@@ -44,6 +44,30 @@ class UI{
         document.getElementById('isbn').value = '';
     }
 }
+
+class Store{
+    static getBooks(){
+        let books;
+        if(localStorage.getItem('books') === null){
+            books = [];
+        }else {
+            books = JSON.parse(localStorage.getItem('books'));
+        }
+        return books;
+    }
+    static displayBooks(){
+
+    }
+    static addBook(book){
+        const books = Store.getBooks();
+        books.push(book);
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+    static removeBook(){
+
+    }
+}
+
 document.getElementById('book-form').addEventListener('submit', function(e){
     const title = document.getElementById('title').value,
           author = document.getElementById('author').value,
@@ -56,6 +80,7 @@ document.getElementById('book-form').addEventListener('submit', function(e){
         ui.showAlert('Please fill in all fields!', 'error');
     }else{
         ui.addBookToList(book);
+        Store.addBook(book);
         ui.showAlert('Book Added!', 'success');
         ui.clearFields();   
     }
