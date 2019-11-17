@@ -28,7 +28,9 @@ class UI{
 
     }
     clearFields(){
-
+        document.getElementById('title').value = '';
+        document.getElementById('author').value = '';
+        document.getElementById('isbn').value = '';
     }
 }
 document.getElementById('book-form').addEventListener('submit', function(e){
@@ -41,6 +43,6 @@ document.getElementById('book-form').addEventListener('submit', function(e){
     const ui = new UI();
 
     ui.addBookToList(book);
-
+    ui.clearFields();
     e.preventDefault();
 });
