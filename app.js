@@ -51,9 +51,10 @@ document.getElementById('book-form').addEventListener('submit', function(e){
     const ui = new UI();
 
     if(title === '' || author === '' || isbn === ''){
-        ui.showAlert('Please fill in all fields', 'error');
+        ui.showAlert('Please fill in all fields!', 'error');
     }else{
         ui.addBookToList(book);
+        ui.showAlert('Book Added!', 'success');
         ui.clearFields();   
     }
 
